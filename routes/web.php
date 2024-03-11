@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
@@ -20,6 +21,11 @@ Route::get('admin',[AuthController::class,'index'])->name('auth.admin')->middlew
 Route::get('logout',[AuthController::class,'logout'])->name('auth.logout');
 Route::post('login',[AuthController::class,'login'])->name('auth.login')->middleware('login');
 Route::get('/',[DashboardController::class,'index'])->name('home')->middleware('login')->middleware('authen','login');
+
+
+/*AJAX
+*/
+Route::get('user/ajax/location/getLocation',[LocationController::class,'getLocation'])->name('user.ajax.location.getLocation')->middleware('authen');
 /*
 Users
 */

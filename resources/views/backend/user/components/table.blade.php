@@ -1,4 +1,4 @@
-<h4>{{ $tableHeading }}</h4>
+<h4 class="mt-4">{{ $tableHeading }}</h4>
 <table class="table mt-4">
     <thead class="thead-dark">
         <tr>

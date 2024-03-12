@@ -10,9 +10,7 @@
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
-        <!-- plugins:css -->
-        <link rel="stylesheet" href="{{ asset('vendors/mdi/css/materialdesignicons.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
+        <!-- plugins:css --
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -27,4 +25,5 @@
     <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </head>

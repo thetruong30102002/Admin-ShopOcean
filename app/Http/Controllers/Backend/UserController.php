@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Services\Interfaces\UserServiceInterface as UserService;
@@ -29,17 +30,25 @@ class UserController extends Controller
     public function create()
     {
         $provinces = $this->provinceRepository->all();
-        
+
         $config = [
             'css' => [
                 '<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />'
             ],
             'js' => [
-                '<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>'
+                '<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>',
+                '<script src="https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-ckfinder@41.2.0/src/index.min.js"></script>'
             ]
         ];
         $config['seo'] = config('apps.user');
         $template = 'backend.user.create';
         return view('backend.dashboard.layout', compact('template', 'config', 'provinces'));
+    }
+    public function store(StoreUserRequest $request)
+    {
+        if($this->userService->create($request)){
+            return redirect()->route('user.index')->with('success', 'Thêm mới bản ghi thành công');
+        }
+        return redirect()->route('user.index')->with('error', 'Thêm mới bản ghi không thành công. Hãy thử lại');
     }
 }

@@ -26,10 +26,12 @@ Route::get('/',[DashboardController::class,'index'])->name('home')->middleware('
 /*AJAX
 */
 Route::get('user/ajax/location/getLocation',[LocationController::class,'getLocation'])->name('user.ajax.location.getLocation')->middleware('authen');
+Route::get('user/ajax/location/getWard',[LocationController::class,'getWard'])->name('user.ajax.location.getWard')->middleware('authen');
 /*
 Users
 */
 Route::get('user/index',[UserController::class,'index'])->name('user.index')->middleware('authen');
 Route::get('user/create',[UserController::class,'create'])->name('user.create')->middleware('authen');
+Route::post('/store',[UserController::class,'store'])->name('user.store')->middleware('authen');
 Route::get('user/update',[UserController::class,'update'])->name('user.update')->middleware('authen');
 Route::get('user/destroy',[UserController::class,'destroy'])->name('user.destroy')->middleware('authen');

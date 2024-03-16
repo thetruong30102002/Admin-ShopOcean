@@ -1,5 +1,6 @@
 <div class="action d-flex justify-content-between">
-    <form action="{{route('user.index')}}" method="get">
+    <div class=""></div>
+    {{-- <form action="{{route('user.index')}}" method="get">
         <div class="d-flex uk-flex-middle">
             <select name="user_catalogue_id" id="" style="border-radius: 5px;">
                 <option value="0" selected>Chọn nhóm thành viên</option>
@@ -16,7 +17,7 @@
                 </span>
             </div>
         </div>
-    </form>
+    </form> --}}
     <div class="">
         <a href="{{ route('user.create') }}" class="btn btn-success"><i class="fa-solid fa-user-plus"></i>Thêm mới
             thành viên</a>

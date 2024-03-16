@@ -14475,3 +14475,20 @@ table strong {
   background-color: green !important;
   border-color: green !important;
 } */
+body {
+  /* Prevent the user from selecting text in the example */
+  user-select: none;
+}
+
+#draggable {
+  text-align: center;
+  background: white;
+}
+
+.dropzone {
+  width: 200px;
+  height: 20px;
+  background: blueviolet;
+  margin: 10px;
+  padding: 10px;
+}

@@ -38,8 +38,8 @@
                         </div>
                     </td>
                     <td class="text-center">
-                        <a href="" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="{{route('user.edit',$user->id)}}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{{route('user.delete',$user->id)}}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                 </tr>
             @endforeach

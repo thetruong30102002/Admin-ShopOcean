@@ -18,4 +18,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function getAllPaginate(){
        return User::paginate(10);
     }
+    public function findById(int $id)
+    {
+        return User::find($id);
+    }
 }

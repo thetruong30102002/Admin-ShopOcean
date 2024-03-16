@@ -4,46 +4,43 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\Interfaces\DistrictRepositoryInterface as DistrictRepository;
-use App\Repositories\Interfaces\WardRepositoryInterface as WardRepository;
+use App\Repositories\Interfaces\DistrictRepositoryInterface  as DistrictRepository;
+use App\Repositories\Interfaces\ProvinceRepositoryInterface  as ProvinceRepository;
+
 class LocationController extends Controller
 {
+
     protected $districtRepository;
-    protected $wardRepository;
-    public function __construct(DistrictRepository $districtRepository,WardRepository $wardRepository)
-    {
+    protected $provinceRepository;
+
+    public function __construct(
+        DistrictRepository $districtRepository,
+        ProvinceRepository $provinceRepository
+    ){
         $this->districtRepository = $districtRepository;
-        $this->wardRepository = $wardRepository;
+        $this->provinceRepository = $provinceRepository;
     }
-    public function getLocation(Request $request)
-    {
-        $province_id = $request->input('province_id');
-        $districts = $this->districtRepository->findDisctrictByProvinceId( $province_id);
-        $response= [
-            'html' => $this->renderHtml($districts)
-        ];
-        return response()->json($response);
-    }
-    public function renderHtml($districts){
-        $html = '<option value="0">[Chọn Quận/Huyện]</option>';
-        foreach($districts as $district){
-        $html .= '<option value="'.$district->code.'">'.$district->name.'</option>';
+
+    public function getLocation(Request $request){
+        $get = $request->input();
+        $html = '';
+        if($get['target'] == 'districts'){
+            $province = $this->provinceRepository->findId($get['data']['location_id'], ['code','name'], ['districts']);
+            $html = $this->renderHtml($province->districts);
+        }else if($get['target'] == 'wards'){
+            $district = $this->districtRepository->findId($get['data']['location_id'], ['code','name'], ['wards']);
+            $html = $this->renderHtml($district->wards, '[Chọn Phường/Xã]');
         }
-        return $html;
-    }
-    public function getWard(Request $request)
-    {
-        $district_id = $request->input('district_id');
-        $wards = $this->wardRepository->findWardByDistrictId( $district_id);
-        $response= [
-            'html' => $this->renderHtmlWard($wards)
+        $response = [
+            'html' => $html
         ];
-        return response()->json($response);
+        return response()->json($response); 
     }
-    public function renderHtmlWard($wards){
-        $html = '<option value="0">[Chọn Phường/Xã]</option>';
-        foreach($wards as $ward){
-        $html .= '<option value="'.$ward->code.'">'.$ward->name.'</option>';
+
+    public function renderHtml($districts, $root = '[Chọn Quận/Huyện]'){
+        $html = '<option value="0">'.$root.'</option>';
+        foreach($districts as $district){
+            $html .= '<option value="'.$district->code.'">'.$district->name.'</option>';
         }
         return $html;
     }

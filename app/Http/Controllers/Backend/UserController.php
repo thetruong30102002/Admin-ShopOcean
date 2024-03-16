@@ -4,44 +4,40 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Services\Interfaces\UserServiceInterface as UserService;
 use App\Repositories\Interfaces\ProvinceRepositoryInterface as ProvinceService;
-
+use App\Repositories\Interfaces\UserRepositoryInterface as UserRepository;
 class UserController extends Controller
 {
     protected $userService;
     protected $provinceRepository;
-    public function __construct(UserService $userService, ProvinceService $provinceRepository)
+    protected $userRepository;
+    public function __construct(UserService $userService, ProvinceService $provinceRepository,UserRepository $userRepository)
     {
         $this->userService = $userService;
         $this->provinceRepository = $provinceRepository;
+        $this->userRepository = $userRepository;
+    
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $config['seo'] = config('apps.user');
-        $users = $this->userService->paginate();
+        $users = $this->userService->paginate($request);
         // $users = User::paginate(10);
         $template = 'backend.user.index';
         return view('backend.dashboard.layout', compact('template', 'users', 'config'));
     }
     public function create()
     {
-        $provinces = $this->provinceRepository->all();
 
-        $config = [
-            'css' => [
-                '<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />'
-            ],
-            'js' => [
-                '<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>',
-                '<script src="https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-ckfinder@41.2.0/src/index.min.js"></script>'
-            ]
-        ];
+        $provinces = $this->provinceRepository->all();
         $config['seo'] = config('apps.user');
-        $template = 'backend.user.create';
+        $config['method'] = 'create';
+        $template = 'backend.user.store';
         return view('backend.dashboard.layout', compact('template', 'config', 'provinces'));
     }
     public function store(StoreUserRequest $request)
@@ -51,4 +47,32 @@ class UserController extends Controller
         }
         return redirect()->route('user.index')->with('error', 'Thêm mới bản ghi không thành công. Hãy thử lại');
     }
+    public function edit($id){
+        $user = $this->userRepository->findById($id);
+        $provinces = $this->provinceRepository->all();
+        $config['seo'] = config('apps.user');
+        $config['method'] = 'edit';
+        $template = 'backend.user.store';
+        return view('backend.dashboard.layout', compact('template', 'config', 'provinces','user'));
+    }
+    public function update($id,UpdateUserRequest $request){
+        if($this->userService->update($id,$request)){
+            return redirect()->route('user.index')->with('success', 'Cập nhật bản ghi thành công');
+        }
+        return redirect()->route('user.index')->with('error', 'Cập nhật bản ghi không thành công. Hãy thử lại');
+    }
+    public function delete($id){
+        $user = $this->userRepository->findById($id);
+        $config['seo'] = config('apps.user');
+        $config['method'] = 'delete';
+        $template = 'backend.user.delete';
+        return view('backend.dashboard.layout', compact('template', 'user','config'));
+    }
+    public function destroy($id){
+        if($this->userService->destroy($id)){
+            return redirect()->route('user.index')->with('success', 'Xóa bản ghi thành công');
+        }
+        return redirect()->route('user.index')->with('error', 'Xóa bản ghi không thành công. Hãy thử lại');
+    }
+      
 }

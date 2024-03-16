@@ -7,7 +7,7 @@ use App\Repositories\Interfaces\DistrictRepositoryInterface;
  * Class PronviceService
  * @package App\Services
  */
-class DistrictRepository implements DistrictRepositoryInterface
+class DistrictRepository extends BaseRepository implements DistrictRepositoryInterface
 {
    protected $model;
 
@@ -18,7 +18,7 @@ class DistrictRepository implements DistrictRepositoryInterface
  public function all(){
     return District::all();
  }
- public function findDisctrictByProvinceId(int $provinceId=0){
- return $this->model->where('province_code','=', $provinceId)->get();
+ public function findDistrictByProvinceId(int $province_id=0){
+ return $this->model->where('province_code','=', $province_id)->get();
  }
 }

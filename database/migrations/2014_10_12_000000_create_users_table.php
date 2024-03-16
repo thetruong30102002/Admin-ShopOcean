@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('district_id',10)->nullable();
             $table->string('ward_id',10)->nullable();
             $table->string('address',255)->nullable();
-            $table->dateTime('bitrhday')->nullable();
+            $table->dateTime('birthday')->nullable();
             $table->string('image',255)->nullable();
             $table->text('description')->nullable();
             $table->text('user_agent')->nullable();
+            $table->string('user_catelogue_id')->nullable();
             $table->text('ip')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

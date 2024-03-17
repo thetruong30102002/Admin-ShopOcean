@@ -1,10 +1,11 @@
 <h4 class="mt-4">{{ $tableHeading }}</h4>
-<table class="table mt-4">
+<table class="table table-bordered mt-4">
     <thead class="thead-dark">
         <tr>
             <th scope="col"><input type="checkbox" value="" id="checkAll" class="input-checkbox"></th>
             <th scope="col"><strong> Ảnh đại diện</strong></th>
-            <th scope="col"><strong> Thông tin thành viên</strong></th>
+            <th scope="col"><strong> Email</strong></th>
+            <th scope="col"><strong>Số điện thoại</strong></th>
             <th scope="col"><strong> Địa chỉ</strong></th>
             <th scope="col"><strong> Tình trạng</strong></th>
             <th scope="col" class="text-center"><strong> Thao tác</strong></th>
@@ -17,19 +18,20 @@
                     <th scope="row"><input type="checkbox" value="" id="checkAll"
                             class="input-checkbox checkBoxItem"></th>
                     <td>
-                        <img src="https://kenh14cdn.com/203336854389633024/2022/12/19/worldcupmessi-16714134707591286548462.jpeg"
+                        <img src="{{$user->image}}"
                             alt="" width="50px" height="50px" style="border-radius: 50%">
                     </td>
                     <td>
-                        <div class="user-item name"><strong> Họ và tên:</strong> {{ $user->name }}</div>
-                        <div class="user-item email"><strong> Email:</strong> {{ $user->email }}</div>
-                        <div class="user-item phone"><strong> Phone:</strong> {{ $user->phone }}</div>
+                        <div class="user-item name"><strong> {{ $user->name }}</strong></div>
                     </td>
                     <td>
-                        <div class=""><strong> Địa chỉ:</strong> {{ $user->address }}</div>
-                        <div class=""><strong> Phường:</strong> {{ $user->address }}</div>
-                        <div class=""><strong> Quận:</strong> {{ $user->address }}</div>
-                        <div class=""><strong> Thành phố:</strong> {{ $user->address }}</div>
+                        <div class="user-item email"><strong>{{ $user->email }}</strong> </div>
+                    </td>
+                    <td>
+                        <div class="user-item phone"><strong>{{ $user->phone }}</strong> </div>
+                    </td>
+                    <td>
+                        <div class=""><strong> {{ $user->address }}</strong></div>
                     </td>
                     <td class="text-center">
                         <div class="form-check form-switch">

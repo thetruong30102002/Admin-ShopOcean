@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <form action="{{ route('user.index') }}" method="get">
+        {{-- <form action="{{ route('user.index') }}" method="get">
             <div class="d-flex uk-flex-middle">
                 <select name="user_catalogue_id" id="" style="border-radius: 5px;">
                     <option value="0" selected>Chọn nhóm thành viên</option>
@@ -17,10 +17,10 @@
                     </span>
                 </div>
             </div>
-        </form>
+        </form> --}}
     </div>
-    <div class="col">
-        <a href="{{ route('user.create') }}" class="btn btn-success"><i class="fa-solid fa-user-plus"></i>Thêm mới
+    <div class="col text-right ">
+        <a href="{{ route('user.create') }}" class="btn btn-danger"><i class="fa-solid fa-user-plus"></i>Thêm mới
             thành viên</a>
     </div>
 </div>

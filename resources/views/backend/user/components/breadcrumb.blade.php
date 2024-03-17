@@ -1,9 +1,9 @@
-<div class="col-lg-8">
+<div class="col-lg-12">
     <h2>{{ $title }}</h2>
-    <ol class="breadcrumb" style="margin-bottom: 10px">
+    <ul class="breadcrumb" style="margin-bottom: 10px">
         <li>
-            <a href="{{ route('dashboard.index') }}" style="text-decoration: none">Trang chủ /</a>
+            <a href="{{ route('dashboard.index') }}" style="text-decoration: none">Trang chủ</a>
         </li>
         <li class="active"><strong>{{ $title }}</strong></li>
-    </ol>
+    </ul>
 </div>

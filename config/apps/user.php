@@ -4,6 +4,9 @@ return [
      'tableHeading' => 'Danh sách thành viên',
     ],
     'create' => ['title' => 'Thêm mới thành viên',
-    
+    ],
+    'edit' => ['title' => 'Thay đổi thông tin thành viên',
+    ],
+    'delete' => ['title' => 'Xóa thành viên',
     ],
 ];

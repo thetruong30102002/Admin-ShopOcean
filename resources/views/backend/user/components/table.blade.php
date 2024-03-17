@@ -18,7 +18,7 @@
                             class="input-checkbox checkBoxItem"></th>
                     <td>
                         <img src="https://kenh14cdn.com/203336854389633024/2022/12/19/worldcupmessi-16714134707591286548462.jpeg"
-                            alt="">
+                            alt="" width="50px" height="50px" style="border-radius: 50%">
                     </td>
                     <td>
                         <div class="user-item name"><strong> Họ và tên:</strong> {{ $user->name }}</div>
@@ -47,3 +47,4 @@
     </tbody>
 </table>
 {{ $users->links() }}
+

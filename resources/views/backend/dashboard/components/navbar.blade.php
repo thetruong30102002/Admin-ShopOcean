@@ -1,42 +1,28 @@
-<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-      <a class="navbar-brand brand-logo" href="{{route('dashboard.index')}}"><img src="{{asset('assets/images/logo.svg')}}" alt="logo" /></a>
-      <a class="navbar-brand brand-logo-mini" href="{{route('dashboard.index')}}"><img src="{{asset('assets/images/logo-mini.svg')}}" alt="logo" /></a>
-    </div>
-    <div class="navbar-menu-wrapper d-flex align-items-stretch">
-      <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-        <span class="mdi mdi-menu"></span>
-      </button>
-      <div class="search-field d-none d-md-block">
-        <form class="d-flex align-items-center h-100" action="#">
-          <div class="input-group">
-            <div class="input-group-prepend bg-transparent">
-              <i class="input-group-text border-0 mdi mdi-magnify"></i>
-            </div>
-            <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
-          </div>
-        </form>
-      </div>
-      <ul class="navbar-nav navbar-nav-right">
-        <li class="nav-item nav-profile dropdown">
-          <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="nav-profile-img">
-              <img src="{{asset('assets/images/faces/face1.jpg')}}" alt="image">
-              <span class="availability-status online"></span>
-            </div>
-            <div class="nav-profile-text">
-              <p class="mb-1 text-black">Admin</p>
-            </div>
-          </a>
-          <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-            <a class="dropdown-item" href="#">
-              <i class="mdi mdi-cached me-2 text-success"></i> Admin </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{route('auth.logout')}}">
-              <i class="mdi mdi-logout me-2 text-primary"></i> Đăng xuất </a>
-          </div>
-        </li>
-        
-      </ul>
-    </div>
-  </nav>
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
+                    class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" action="search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Search for something..." class="form-control"
+                        name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+           
+            <li>
+                <a href="{{route('auth.logout')}}">
+                    <i class="fa fa-sign-out"></i> Log out
+                </a>
+            </li>
+            <li>
+                <a class="right-sidebar-toggle">
+                    <i class="fa fa-tasks"></i>
+                </a>
+            </li>
+        </ul>
+
+    </nav>
+</div>

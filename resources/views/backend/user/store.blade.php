@@ -38,14 +38,15 @@
                 </div>
                 @php
                     $userCatalogue = ['[Chọn nhóm thành viên]', 'Quản trị viên', 'Cộng tác viên'];
+                    
                 @endphp
                 <div class="form-group d-flex ">
                     <div class="col-sm-6">
-                        <label class="control-label" style="display: inline">Nhóm thành viên <span
+                        <label class="control-label" >Nhóm thành viên <span
                                 class="text-danger">(*)</span></label>
                         <select class="form-control" name="user_catelogue_id" id="">
                             @foreach($userCatalogue as $key =>$item)
-                            <option {{ $key == old('user_catalogue_id',
+                            <option {{ $key == old('user_catelogue_id',
                             (isset($user->user_catelogue_id)) ? 
                             $user->user_catelogue_id : '') ? 'selected': ''}}
                             value="{{$key}}">{{$item}}</option>
@@ -66,7 +67,7 @@
                         <input type="password" class="form-control" name="password">
                     </div>
                     <div class="col-sm-6">
-                        <label for="" class="control-label" style="display: inline">Nhập lại mật khẩu
+                        <label for="" class="control-label" >Nhập lại mật khẩu
                             <span class="text-danger">(*)</span></label>
                         <input type="password" class="form-control" name="re_password">
                     </div>
@@ -90,7 +91,7 @@
             <div class="" >
                 <div class="form-group d-flex ">
                     <div class="col-sm-6">
-                        <label class=" control-label " style="display: inline">Thành phố </label>
+                        <label class=" control-label " >Thành phố </label>
                         {{-- setupSelect2 --}}
                         <select class="form-control setupSelect2 province location" name="province_id"  data-target="districts">
                             <option value="0" selected>[Chọn thành phố]</option>
@@ -102,14 +103,14 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label class="control-label" style="display: inline">Quận/Huyện</label>
+                        <label class="control-label" >Quận/Huyện</label>
                         <select class="form-control districts setupSelect2 location" name="district_id" data-target="wards">
                         </select>
                     </div>
                 </div>
                 <div class="form-group d-flex ">
                     <div class="col-sm-6">
-                        <label class="control-label" style="display: inline">Phường/Xã </label>
+                        <label class="control-label" >Phường/Xã </label>
                         <select class="form-control setupSelect2 wards " name="ward_id">
                         </select>
                     </div>
@@ -121,13 +122,13 @@
                 </div>
                 <div class="form-group d-flex ">
                     <div class="col-sm-6">
-                        <label for="" class="control-label" style="display: inline">Số điện
+                        <label for="" class="control-label" >Số điện
                             thoại</label>
                         <input type="text" class="form-control" name="phone" id="phone"
                             value="{{ old('phone', $user->phone ?? '') }}">
                     </div>
                     <div class="col-sm-6">
-                        <label for="" class="control-label" style="display: inline">Ghi chú</label>
+                        <label for="" class="control-label" >Ghi chú</label>
                         <input type="text" class="form-control " name="description" id="description"
                             value="{{ old('description', $user->description ?? '') }}">
                     </div>
@@ -149,3 +150,5 @@
     var district_id = '{{ (isset($user->district_id)) ? $user->district_id : old('district_id') }}'
     var ward_id = '{{ (isset($user->ward_id)) ? $user->ward_id : old('ward_id') }}'
 </script>
+
+<script src="{{ asset('library/location.js') }}"></script>

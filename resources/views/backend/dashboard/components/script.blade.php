@@ -6,6 +6,5 @@
 <script src="{{ asset('js/inspinia.js') }}"></script>
 <script src="{{ asset('js/plugins/pace/pace.min.js') }}"></script>
 <script src="{{ asset('library/library.js') }}"></script>
-<script src="{{ asset('library/location.js') }}"></script>
 <script src="{{ asset('library/finder.js') }}"></script>
 <script src="{{ asset('plugin/ckfinder_2/ckfinder.js') }}"></script>

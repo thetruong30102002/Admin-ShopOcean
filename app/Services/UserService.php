@@ -23,64 +23,76 @@ class UserService implements UserServiceInterface
     }
     public function paginate($request)
     {
-        $users = $this->userRepository->getAllPaginate();
+        $condition['keyword'] = addslashes($request->input('keyword'));
+        $condition['user_catelogue_id'] = addslashes($request->input('user_catelogue_id'));
+        $perPage = $request->integer('perpage');
+        $users = $this->userRepository->pagination($this->paginateSelect(),$condition,[],$perPage,['path'=>'user/index']);
         return $users;
     }
     public function create($request)
     {
-       DB::beginTransaction();
-       try{
-        $payload = $request->except(['_token','send','re_password']);
-        $payload['birthday'] = $this->convertBirthdayDate($payload['birthday']);
-        $payload['password'] = Hash:: make($payload['password']);
-        $user = $this->userRepository->create($payload);
-        DB::commit();
-        return true;
-       }catch(\Exception $e) {
-        DB::rollBack();
-        echo $e->getMessage();
-        die();
-        return false;
-       }
-
-    }
-    public function update($id,$request)
-    {
-       DB::beginTransaction();
-       try{
-        $payload = $request->except(['_token','send']);
-        // dd($payload);
-        $payload['birthday'] = $this->convertBirthdayDate($payload['birthday']);
-        $user = $this->userRepository->update($id,$payload);
-        DB::commit();
-        return true;
-       }catch(\Exception $e) {
-        DB::rollBack();
-        echo $e->getMessage();
-        die();
-        return false;
-       }
-
-    }
-
-    public function destroy($id){
         DB::beginTransaction();
-       try{
-        $user = $this->userRepository->forceDelete($id);
-        DB::commit();
-        return true;
-       }catch(\Exception $e) {
-        DB::rollBack();
-        echo $e->getMessage();
-        die();
-        return false;
-       }
-
+        try {
+            $payload = $request->except(['_token', 'send', 're_password']);
+            $payload['birthday'] = $this->convertBirthdayDate($payload['birthday']);
+            $payload['password'] = Hash::make($payload['password']);
+            $user = $this->userRepository->create($payload);
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            echo $e->getMessage();
+            die();
+            return false;
+        }
+    }
+    public function update($id, $request)
+    {
+        DB::beginTransaction();
+        try {
+            $payload = $request->except(['_token', 'send']);
+            // dd($payload);
+            $payload['birthday'] = $this->convertBirthdayDate($payload['birthday']);
+            $user = $this->userRepository->update($id, $payload);
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            echo $e->getMessage();
+            die();
+            return false;
+        }
     }
 
-    private function convertBirthdayDate ($birthday = ''){
-        $carbonDate = Carbon::createFromFormat('Y-m-d',$birthday);
+    public function destroy($id)
+    {
+        DB::beginTransaction();
+        try {
+            $user = $this->userRepository->forceDelete($id);
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            echo $e->getMessage();
+            die();
+            return false;
+        }
+    }
+
+    private function convertBirthdayDate($birthday = '')
+    {
+        $carbonDate = Carbon::createFromFormat('Y-m-d', $birthday);
         $birthday = $carbonDate->format('Y-m-d H:i:s');
         return $birthday;
+    }
+
+    private function paginateSelect(){
+        return [
+            'id',
+            'email',
+            'phone',
+            'address',
+            'name',
+        ];
     }
 }

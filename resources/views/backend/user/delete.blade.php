@@ -21,13 +21,13 @@
             <div class="" style="width: 70%;">
                 <div class="form-group d-flex ">
                     <div class="col-sm-6">
-                        <label for="" class="col-sm-3 control-label">Email<span
+                        <label for="" class=" control-label">Email<span
                                 class="text-danger">(*)</span></label>
                         <input type="text" class="form-control" name="email" id="email"
                             value="{{ old('email', $user->email ?? '') }}" autocomplete="off" readonly>
                     </div>
                     <div class="col-sm-6">
-                        <label for="" class="col-sm-3 control-label">Họ tên <span
+                        <label for="" class=" control-label">Họ tên <span
                                 class="text-danger">(*)</span></label>
                         <input type="text" class="form-control" name="name"
                             value="{{ old('name', $user->name ?? '') }}" autocomplete="off" readonly>

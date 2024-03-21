@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Services\Interfaces\UserServiceInterface as UserService;
 use App\Repositories\Interfaces\ProvinceRepositoryInterface as ProvinceService;
 use App\Repositories\Interfaces\UserRepositoryInterface as UserRepository;
+use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
     protected $userService;
@@ -19,26 +21,26 @@ class UserController extends Controller
     {
         $this->userService = $userService;
         $this->provinceRepository = $provinceRepository;
-        $this->userRepository = $userRepository;
-    
+        $this->userRepository = $userRepository; 
     }
 
     public function index(Request $request)
     {
+        $auth = Auth::user();
         $config['seo'] = config('apps.user');
         $users = $this->userService->paginate($request);
         // $users = User::paginate(10);
         $template = 'backend.user.index';
-        return view('backend.dashboard.layout', compact('template', 'users', 'config'));
+        return view('backend.dashboard.layout', compact('template', 'users', 'config','auth'));
     }
     public function create()
     {
-
+        $auth = Auth::user();
         $provinces = $this->provinceRepository->all();
         $config['seo'] = config('apps.user');
         $config['method'] = 'create';
         $template = 'backend.user.store';
-        return view('backend.dashboard.layout', compact('template', 'config', 'provinces'));
+        return view('backend.dashboard.layout', compact('template', 'config', 'provinces','auth'));
     }
     public function store(StoreUserRequest $request)
     {
@@ -48,12 +50,13 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('error', 'Thêm mới bản ghi không thành công. Hãy thử lại');
     }
     public function edit($id){
+        $auth = Auth::user();
         $user = $this->userRepository->findById($id);
         $provinces = $this->provinceRepository->all();
         $config['seo'] = config('apps.user');
         $config['method'] = 'edit';
         $template = 'backend.user.store';
-        return view('backend.dashboard.layout', compact('template', 'config', 'provinces','user'));
+        return view('backend.dashboard.layout', compact('template', 'config', 'provinces','user','auth'));
     }
     public function update($id,UpdateUserRequest $request){
         if($this->userService->update($id,$request)){
@@ -62,11 +65,12 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('error', 'Cập nhật bản ghi không thành công. Hãy thử lại');
     }
     public function delete($id){
+        $auth = Auth::user();
         $user = $this->userRepository->findById($id);
         $config['seo'] = config('apps.user');
         $config['method'] = 'delete';
         $template = 'backend.user.delete';
-        return view('backend.dashboard.layout', compact('template', 'user','config'));
+        return view('backend.dashboard.layout', compact('template', 'user','config','auth'));
     }
     public function destroy($id){
         if($this->userService->destroy($id)){

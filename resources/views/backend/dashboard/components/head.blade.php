@@ -16,6 +16,7 @@
     <link href="{{asset('css/plugins/toastr/toastr.min.css')}}" rel="stylesheet">
     <!-- Gritter -->
     <link href="{{asset('js/plugins/gritter/jquery.gritter.css')}}" rel="stylesheet">
+    <link href="{{asset('css/customize.css')}}" rel="stylesheet">
     <link href="{{asset('css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/6a07975055.js" crossorigin="anonymous"></script>
